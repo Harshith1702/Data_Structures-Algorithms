@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main() {
+    int t;
+    scanf("%d",&t);
+    while(t--){
+        int n;
+        scanf("%d",&n);
+        int a[n];
+        for(int i=0;i<n;i++){
+            scanf("%d",&a[i]);
+        }
+
+        long long ans=0;
+        for(int i=0;i<31;i++){
+            int set=0;
+            for(int j=0;j<n;j++){
+                if(a[j] & (1<<i)){
+                    set++;
+                }
+            }ans+=(1LL*set*(n-set)*(1<<i));
+        }printf("%lld\n",2*ans);
+    }
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}

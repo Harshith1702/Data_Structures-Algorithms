@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    static void MergeSort(int[] ar,int l,int h){
+     if(l==h) return;
+     int mid=(l+h)/2;
+     MergeSort(ar,l,mid);
+     MergeSort(ar,mid+1,h);
+     Merge(ar,l,mid,h);
+    }
+
+    static void Merge(int[] ar,int l,int mid,int h){
+     int[] temp=new int[h-l+1];
+     int p1=l,p2=mid+1,p3=0;
+     while(p1<=mid && p2<=h){
+         if(ar[p1]<ar[p2])  temp[p3++]=ar[p1++];
+         else{    
+             temp[p3++]=ar[p2++];
+         }
+    }
+    while(p1<=mid)  temp[p3++]=ar[p1++];
+    while(p2<=h)    temp[p3++]=ar[p2++];
+
+    for(int i=0;i<h-l+1;i++)    ar[i+l]=temp[i];
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int t=sc.nextInt();
+        while(t-- >0){
+            int n=sc.nextInt();
+            int k=sc.nextInt();
+            int[] a=new int[n];
+            for(int i=0;i<n;i++)    a[i]=sc.nextInt();
+            MergeSort(a,0,n-1);
+            int p1=0,p2=n-1,f=0;
+            while(p1<p2){
+                if(a[p1]+a[p2]==k){    
+                    System.out.println("True");
+                    f=1;
+                    break;
+                    }
+                else if(a[p1]+a[p2]>k)  p2--;
+                else p1++;
+            }
+            if(f!=1)    System.out.println("False");
+        }
+    }
+}
